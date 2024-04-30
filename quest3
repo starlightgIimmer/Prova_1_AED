@@ -1,0 +1,73 @@
+/******************************************************************************
+
+Peça ao usuário fornecer o tamanho de um vetor a ser ordenado; 
+Crie um vetor de inteiros de forma aleatória de acordo com o parâmetro de entrada; 
+Exiba o vetor que foi criado no passo anterior na tela do computador; 
+Ordene o vetor de forma decrescente usando o algoritmo ordenação por inserção. 
+Exiba o vetor ordenado ao final do programa na tela do computador; 
+
+*******************************************************************************/
+
+//declarando as bibliotecas usadas.
+#include <iostream>
+#include <time.h>
+#include <stdlib.h>
+
+using namespace std;
+
+//criando a função para ordenar por inserção 'inserctionSort'.
+void insertionSort(int n, int a[])
+{
+    for(int i = 1; i < n; i++)
+    {
+        int key = a[i];
+        int j = i- 1;
+        
+        while (j>=0 && a[j]>key)
+        {
+            a[j+ 1] = a[j];
+            j = j - 1; 
+        }
+        
+        a[j+ 1] = key;
+    }
+}
+
+//criando outra função para transformar o vetor ordenado pela função insertionSort em decrescente.
+void ordemDecrescente(int x, int v[]) 
+{
+    insertionSort(x - 1, v);
+}
+
+int main()
+{
+    //obtendo o tamanho do vetor a ser ordenado.
+    int T;
+    cout<<"Qual o tamanho do vetor? ";
+    cin>>T;
+    
+    //gerando os valores aleatórios.
+    srand(time(NULL));
+    int vetor[T];
+    for(int i = 0; i<T; i++)
+    {
+        vetor[i]=(1+rand()%300);
+    }
+    
+    //imprimindo o vetor sem ordem na tela.
+    cout << "Os elementos do vetor são: \n";
+    for (int i = 0; i < T; i++) 
+    {
+        cout << vetor[i] << "\n";
+    }
+    
+    //chamando a função ordem decrescente para ordenar o vetor em ordem decrescente e retornando ele nessa ordem.
+    ordemDecrescente(T, vetor);
+    cout<<"O vetor em ordem decrescente se torna:\n";
+    for(int i = 0; i < T; i++)
+    {
+        cout << vetor[i] << "\n";
+    }
+
+    return 0;
+}
